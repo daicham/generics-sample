@@ -3,14 +3,14 @@ package com.example.sample2;
 /**
  * @author daicham
  */
-public class ResponseBody {
-    ResponseBodyContent content;
+class ResponseBody<T extends ResponseBodyContent> {
+    private T content;
 
-    public ResponseBody(ResponseBodyContent content) {
+    ResponseBody(T content) {
         this.content = content;
     }
 
-    public ResponseBodyContent getContent() {
+    T getContent() {
         return content;
     }
 }

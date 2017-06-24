@@ -3,13 +3,22 @@ package com.example.sample2;
 /**
  * @author daicham
  */
-public class ResponseSet {
-    ResponseBody body;
-    public ResponseSet(ResponseBodyContent responseBodyContent) {
-        this.body = new ResponseBody(responseBodyContent);
+class ResponseSet<T extends ResponseBodyContent> {
+    private ResponseBody<T> body;
+
+    private ResponseSet(T responseBodyContent) {
+        body = new ResponseBody<>(responseBodyContent);
     }
 
-    public ResponseBodyContent getResponseBodyContent() {
+    T getResponseBodyContent() {
         return body.getContent();
+    }
+
+    static <T extends ResponseBodyContent> ResponseSet<T> createResponseSet(T content) {
+        return new ResponseSet<>(content);
+    }
+
+    static ResponseSet<DefaultResponseBodyContent> createDefaultResponseSet() {
+        return new ResponseSet<>(new DefaultResponseBodyContent());
     }
 }
